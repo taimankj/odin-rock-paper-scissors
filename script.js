@@ -7,6 +7,8 @@ const rock = document.querySelector("#rock");
 const paper = document.querySelector("#paper");
 const scissors = document.querySelector("#scissors");
 const roundPara = document.querySelector("#round-result");
+const computerItem = document.querySelector("#computer-score");
+const humanItem = document.querySelector("#human-score");
 
 /* 
    RETURN rock, paper, scissors based off random number generated with
@@ -81,10 +83,21 @@ function playRound(humanChoice, computerChoice) {
       }
       break;
   }
+
+  computerItem.textContent = computerScore;
+  humanItem.textContent = humanScore;
+  if (humanScore == 5 || computerScore == 5) {
+    checkWinner();
+  }
 }
 
-// implement playGame function
-function playGame() {}
+function checkWinner() {
+  humanScore > computerScore
+    ? (roundPara.textContent = `Human Wins!`)
+    : (roundPara.textContent = `Computer Wins!`);
+  humanScore = 0;
+  computerScore = 0;
+}
 
 rock.addEventListener("click", (e) => {
   playRound("ROCK", getComputerChoice());
