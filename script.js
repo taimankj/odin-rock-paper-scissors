@@ -9,21 +9,18 @@
          random number equals 3: RETURN "scissors"
 */
 function getComputerChoice() {
-   let randomNumber = Math.floor(Math.random() * 3) + 1;
+  let randomNumber = Math.floor(Math.random() * 3) + 1;
 
-   switch (randomNumber) {
-      case 1:
-         return "rock";
-         break;
-      case 2: 
-         return "paper";
-         break;
-      case 3:
-         return "scissors";
-         break;
-      default:
-         return;
-   }
+  switch (randomNumber) {
+    case 1:
+      return "rock";
+    case 2:
+      return "paper";
+    case 3:
+      return "scissors";
+    default:
+      return;
+  }
 }
 
 /* 
@@ -37,108 +34,94 @@ function getComputerChoice() {
       RETURN rock, paper, or scissors based off choice
 */
 function getHumanChoice() {
-   let userInput = prompt(`Decide your choice based off the following:
+  let userInput = prompt(`Decide your choice based off the following:
       1 - rock
       2 - paper
       3 - scissors`);
-   
-   switch (+userInput) {
-      case 1:
-         return "rock";
-         break;
-      case 2: 
-         return "paper";
-         break;
-      case 3:
-         return "scissors";
-         break;
-      default:
-         return;
-   }
+
+  switch (+userInput) {
+    case 1:
+      return "rock";
+    case 2:
+      return "paper";
+    case 3:
+      return "scissors";
+    default:
+      return;
+  }
 }
 
 // Scores
 let humanScore = 0;
 let computerScore = 0;
 
-// IF player chooses rock THEN
-//    IF computer chose rock, paper, or scissors THEN
-//       decide winner/loser based off choice and log winner to console in message 
-//          “You lose! PAPER beats ROCK" or “You win! ROCK beats SCISSORS" 
-//       BUMP winners score  
-// IF player chooses paper THEN
-//    IF computer chose rock, paper, or scissors THEN
-//       decide winner/loser based off choice and log winner to console in message 
-//          “You lose! SCISSORS beats PAPER" or “You win! PAPER beats ROCK" 
-//       BUMP winners score   
-// ELSE player has chosen scissors
-//    IF computer chose rock, paper, or scissors THEN
-//       decide winner/loser based off choice and log winner to console in message 
-//          “You lose! ROCK beats SCISSORS" or “You win! SCISSORS beats PAPER" 
-//       BUMP winners score
-// ENDIF
 function playRound(humanChoice, computerChoice) {
-   humanChoice = humanChoice.toUpperCase();
-   computerChoice = computerChoice.toUpperCase();
-   
-   switch (humanChoice) {
-      case "ROCK":
-         switch (computerChoice) {
-            case "ROCK":
-               console.log("TIE!");
-               break;
-            case "PAPER":
-               console.log(`You lose ${computerChoice} beats ${humanChoice}`);
-               computerScore++;
-               break;
-            default:
-               console.log(`You win ${humanChoice} beats ${computerChoice}`);
-               humanScore++;
-               break;
-         }
-         break;
-      case "PAPER":
-         switch (computerChoice) {
-            case "ROCK":
-               console.log(`You win ${humanChoice} beats ${computerChoice}`);
-               humanScore++;
-               break;
-            case "PAPER":
-               console.log("TIE!");
-               break;
-            default:
-               console.log(`You lose ${computerChoice} beats ${humanChoice}`);
-               computerScore++;
-               break;
-         }
-         break;
-      default:
-         switch (computerChoice) {
-            case "ROCK":
-               console.log(`You lose ${computerChoice} beats ${humanChoice}`);
-               computerScore++;
-               break;
-            case "PAPER":
-               console.log(`You win ${humanChoice} beats ${computerChoice}`);
-               humanScore++;
-               break;
-            default:
-               console.log("TIE!");
-               break;
-         }
-         break;
-   }
+  humanChoice = humanChoice.toUpperCase();
+  computerChoice = computerChoice.toUpperCase();
+
+  determineWinner(humanChoice, computerChoice);
+}
+
+// helper function to determine winner
+function determineWinner(humanChoice, computerChoice) {
+  switch (humanChoice) {
+    case "ROCK":
+      switch (computerChoice) {
+        case "ROCK":
+          console.log("TIE!");
+          break;
+        case "PAPER":
+          console.log(`You lose ${computerChoice} beats ${humanChoice}`);
+          computerScore++;
+          break;
+        default:
+          console.log(`You win ${humanChoice} beats ${computerChoice}`);
+          humanScore++;
+          break;
+      }
+      break;
+    case "PAPER":
+      switch (computerChoice) {
+        case "ROCK":
+          console.log(`You win ${humanChoice} beats ${computerChoice}`);
+          humanScore++;
+          break;
+        case "PAPER":
+          console.log("TIE!");
+          break;
+        default:
+          console.log(`You lose ${computerChoice} beats ${humanChoice}`);
+          computerScore++;
+          break;
+      }
+      break;
+    default:
+      switch (computerChoice) {
+        case "ROCK":
+          console.log(`You lose ${computerChoice} beats ${humanChoice}`);
+          computerScore++;
+          break;
+        case "PAPER":
+          console.log(`You win ${humanChoice} beats ${computerChoice}`);
+          humanScore++;
+          break;
+        default:
+          console.log("TIE!");
+          break;
+      }
+      break;
+  }
 }
 
 // implement playGame function
 function playGame() {
-   for (let i = 0; i < 5; i++) {
-      playRound(getHumanChoice(), getComputerChoice());
-   }
+  for (let i = 0; i < 5; i++) {
+    playRound(getHumanChoice(), getComputerChoice());
+  }
 
-   console.log("FINAL SCORE");
-   console.log("Human: " + humanScore);
-   console.log("Computer: " + computerScore);
+  console.log("FINAL SCORE");
+  console.log("Human: " + humanScore);
+  console.log("Computer: " + computerScore);
 }
 
 playGame();
