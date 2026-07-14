@@ -1,6 +1,12 @@
-// Scores
+// Score Initialization
 let humanScore = 0;
 let computerScore = 0;
+
+// DOM Elements
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+const roundPara = document.querySelector("#round-result");
 
 /* 
    RETURN rock, paper, scissors based off random number generated with
@@ -32,14 +38,14 @@ function playRound(humanChoice, computerChoice) {
     case "ROCK":
       switch (computerChoice) {
         case "ROCK":
-          console.log("TIE!");
+          roundPara.textContent = "TIE!";
           break;
         case "PAPER":
-          console.log(`You lose ${computerChoice} beats ${humanChoice}`);
+          roundPara.textContent = `You lose ${computerChoice} beats ${humanChoice}`;
           computerScore++;
           break;
         default:
-          console.log(`You win ${humanChoice} beats ${computerChoice}`);
+          roundPara.textContent = `You win ${humanChoice} beats ${computerChoice}`;
           humanScore++;
           break;
       }
@@ -47,14 +53,14 @@ function playRound(humanChoice, computerChoice) {
     case "PAPER":
       switch (computerChoice) {
         case "ROCK":
-          console.log(`You win ${humanChoice} beats ${computerChoice}`);
+          roundPara.textContent = `You win ${humanChoice} beats ${computerChoice}`;
           humanScore++;
           break;
         case "PAPER":
-          console.log("TIE!");
+          roundPara.textContent = "TIE!";
           break;
         default:
-          console.log(`You lose ${computerChoice} beats ${humanChoice}`);
+          roundPara.textContent = `You lose ${computerChoice} beats ${humanChoice}`;
           computerScore++;
           break;
       }
@@ -62,66 +68,15 @@ function playRound(humanChoice, computerChoice) {
     default:
       switch (computerChoice) {
         case "ROCK":
-          console.log(`You lose ${computerChoice} beats ${humanChoice}`);
+          roundPara.textContent = `You lose ${computerChoice} beats ${humanChoice}`;
           computerScore++;
           break;
         case "PAPER":
-          console.log(`You win ${humanChoice} beats ${computerChoice}`);
+          roundPara.textContent = `You win ${humanChoice} beats ${computerChoice}`;
           humanScore++;
           break;
         default:
-          console.log("TIE!");
-          break;
-      }
-      break;
-  }
-}
-
-// helper function to determine winner
-function determineWinner(humanChoice, computerChoice) {
-  switch (humanChoice) {
-    case "ROCK":
-      switch (computerChoice) {
-        case "ROCK":
-          console.log("TIE!");
-          break;
-        case "PAPER":
-          console.log(`You lose ${computerChoice} beats ${humanChoice}`);
-          computerScore++;
-          break;
-        default:
-          console.log(`You win ${humanChoice} beats ${computerChoice}`);
-          humanScore++;
-          break;
-      }
-      break;
-    case "PAPER":
-      switch (computerChoice) {
-        case "ROCK":
-          console.log(`You win ${humanChoice} beats ${computerChoice}`);
-          humanScore++;
-          break;
-        case "PAPER":
-          console.log("TIE!");
-          break;
-        default:
-          console.log(`You lose ${computerChoice} beats ${humanChoice}`);
-          computerScore++;
-          break;
-      }
-      break;
-    default:
-      switch (computerChoice) {
-        case "ROCK":
-          console.log(`You lose ${computerChoice} beats ${humanChoice}`);
-          computerScore++;
-          break;
-        case "PAPER":
-          console.log(`You win ${humanChoice} beats ${computerChoice}`);
-          humanScore++;
-          break;
-        default:
-          console.log("TIE!");
+          roundPara.textContent = "TIE!";
           break;
       }
       break;
@@ -129,18 +84,14 @@ function determineWinner(humanChoice, computerChoice) {
 }
 
 // implement playGame function
-function playGame() {
-  console.log("FINAL SCORE");
-  console.log("Human: " + humanScore);
-  console.log("Computer: " + computerScore);
-}
+function playGame() {}
 
-document.querySelector("#rock").addEventListener("click", (e) => {
+rock.addEventListener("click", (e) => {
   playRound("ROCK", getComputerChoice());
 });
-document.querySelector("#paper").addEventListener("click", (e) => {
+paper.addEventListener("click", (e) => {
   playRound("PAPER", getComputerChoice());
 });
-document.querySelector("#scissors").addEventListener("click", (e) => {
+scissors.addEventListener("click", (e) => {
   playRound("SCISSORS", getComputerChoice());
 });
