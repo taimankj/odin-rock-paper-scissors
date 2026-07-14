@@ -1,3 +1,7 @@
+// Scores
+let humanScore = 0;
+let computerScore = 0;
+
 /* 
    RETURN rock, paper, scissors based off random number generated with
       1 - rock; 2 - paper; 3 - scissors
@@ -13,53 +17,64 @@ function getComputerChoice() {
 
   switch (randomNumber) {
     case 1:
-      return "rock";
+      return "ROCK";
     case 2:
-      return "paper";
+      return "PAPER";
     case 3:
-      return "scissors";
+      return "SCISSORS";
     default:
       return;
   }
 }
-
-/* 
-   GET user input with input being 1-3 (inclusive)
-   RETURN rock, paper, scissors based off input
-      1 - rock; 2 - paper; 3 - scissors
-   
-      PROMPT user to enter
-         1 for rock, 2 for paper, or 3 for scissors
-      PARSE input to an integer
-      RETURN rock, paper, or scissors based off choice
-*/
-function getHumanChoice() {
-  let userInput = prompt(`Decide your choice based off the following:
-      1 - rock
-      2 - paper
-      3 - scissors`);
-
-  switch (+userInput) {
-    case 1:
-      return "rock";
-    case 2:
-      return "paper";
-    case 3:
-      return "scissors";
-    default:
-      return;
-  }
-}
-
-// Scores
-let humanScore = 0;
-let computerScore = 0;
 
 function playRound(humanChoice, computerChoice) {
-  humanChoice = humanChoice.toUpperCase();
-  computerChoice = computerChoice.toUpperCase();
-
-  determineWinner(humanChoice, computerChoice);
+  switch (humanChoice) {
+    case "ROCK":
+      switch (computerChoice) {
+        case "ROCK":
+          console.log("TIE!");
+          break;
+        case "PAPER":
+          console.log(`You lose ${computerChoice} beats ${humanChoice}`);
+          computerScore++;
+          break;
+        default:
+          console.log(`You win ${humanChoice} beats ${computerChoice}`);
+          humanScore++;
+          break;
+      }
+      break;
+    case "PAPER":
+      switch (computerChoice) {
+        case "ROCK":
+          console.log(`You win ${humanChoice} beats ${computerChoice}`);
+          humanScore++;
+          break;
+        case "PAPER":
+          console.log("TIE!");
+          break;
+        default:
+          console.log(`You lose ${computerChoice} beats ${humanChoice}`);
+          computerScore++;
+          break;
+      }
+      break;
+    default:
+      switch (computerChoice) {
+        case "ROCK":
+          console.log(`You lose ${computerChoice} beats ${humanChoice}`);
+          computerScore++;
+          break;
+        case "PAPER":
+          console.log(`You win ${humanChoice} beats ${computerChoice}`);
+          humanScore++;
+          break;
+        default:
+          console.log("TIE!");
+          break;
+      }
+      break;
+  }
 }
 
 // helper function to determine winner
@@ -115,13 +130,7 @@ function determineWinner(humanChoice, computerChoice) {
 
 // implement playGame function
 function playGame() {
-  for (let i = 0; i < 5; i++) {
-    playRound(getHumanChoice(), getComputerChoice());
-  }
-
   console.log("FINAL SCORE");
   console.log("Human: " + humanScore);
   console.log("Computer: " + computerScore);
 }
-
-playGame();
