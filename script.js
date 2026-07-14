@@ -134,3 +134,13 @@ function playGame() {
   console.log("Human: " + humanScore);
   console.log("Computer: " + computerScore);
 }
+
+document.querySelector("#rock").addEventListener("click", (e) => {
+  playRound("ROCK", getComputerChoice());
+});
+document.querySelector("#paper").addEventListener("click", (e) => {
+  playRound("PAPER", getComputerChoice());
+});
+document.querySelector("#scissors").addEventListener("click", (e) => {
+  playRound("SCISSORS", getComputerChoice());
+});
